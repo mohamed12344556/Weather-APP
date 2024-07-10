@@ -1,12 +1,7 @@
-import 'dart:developer';
-
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/block/cubit/get_weather_cubit.dart';
-import 'package:weather_app/main.dart';
-import 'package:weather_app/models/weather_model.dart';
-import 'package:weather_app/services/weather_service.dart';
+
 
 class SearchView extends StatefulWidget {
   const SearchView({super.key});
