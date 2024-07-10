@@ -2,6 +2,9 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather_app/block/cubit/get_weather_cubit.dart';
+import 'package:weather_app/main.dart';
 import 'package:weather_app/models/weather_model.dart';
 import 'package:weather_app/services/weather_service.dart';
 
@@ -16,15 +19,17 @@ class _SearchViewState extends State<SearchView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Search Weather'),
+      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Center(
           child: TextField(
             onSubmitted: (value) async {
-              WeatherModel weathermodel =
-                  await WeatherService(Dio()).getWeather(cityName: value);
-                  log(weathermodel.cityName);
-                  Navigator.of(context).pop();
+              var getWeatherCubit = BlocProvider.of<GetWeatherCubit>(context);
+              getWeatherCubit.getWeather(cityName: value);
+              Navigator.of(context).pop();
             },
             decoration: InputDecoration(
               labelText: "Search",
